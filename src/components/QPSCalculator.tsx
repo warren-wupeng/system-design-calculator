@@ -16,7 +16,7 @@ export function QPSCalculator({ inputs, setInputs }: QPSCalculatorProps) {
   return (
     <div className="space-y-4">
       <div>
-        <label className="block mb-2">Daily Active Users</label>
+        <label className="block mb-2 text-gray-900">Daily Active Users</label>
         <div className="flex gap-2">
           <input
             type="number"
@@ -43,7 +43,7 @@ export function QPSCalculator({ inputs, setInputs }: QPSCalculatorProps) {
       </div>
 
       <div>
-        <label className="block mb-2">Requests per User</label>
+        <label className="block mb-2 text-gray-900">Requests per User</label>
         <input
           type="number"
           className="w-full p-2 border rounded"
@@ -55,7 +55,7 @@ export function QPSCalculator({ inputs, setInputs }: QPSCalculatorProps) {
       </div>
 
       <div>
-        <label className="block mb-2">Time Period</label>
+        <label className="block mb-2 text-gray-900">Time Period</label>
         <div className="flex gap-2">
           <input
             type="number"

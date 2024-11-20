@@ -3,15 +3,14 @@ import {
   calculateStorage,
   calculateThroughput,
   estimateQPS,
-  powerOf2Conversion,
   UNITS,
   TIME_UNITS,
+  PowerOf2Result,
 } from "../utils/calculations";
 import { StorageCalculator } from "./StorageCalculator";
 import { ThroughputCalculator } from "./ThroughputCalculator";
 import { QPSCalculator } from "./QPSCalculator";
 import { PowerOf2Calculator } from "./PowerOf2Calculator";
-import { PowerOf2Result } from "../utils/calculations";
 
 function Calculator() {
   const [calculationType, setCalculationType] = useState<
@@ -96,7 +95,11 @@ function Calculator() {
       <h1 className="text-3xl font-bold mb-6">System Design Calculator</h1>
 
       <div className="mb-6">
+        <label htmlFor="calculationType" className="block mb-2">
+          Calculation Type
+        </label>
         <select
+          id="calculationType"
           className="w-full p-2 border rounded"
           value={calculationType}
           onChange={(e) => {
@@ -135,7 +138,7 @@ function Calculator() {
 
       {calculationType !== "powerOf2" && (
         <button
-          className="w-full mt-6 bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
+          className="w-full mt-6 bg-blue-700 text-white p-3 rounded hover:bg-blue-800"
           onClick={calculateResult}
         >
           Calculate
@@ -143,9 +146,9 @@ function Calculator() {
       )}
 
       {result !== null && (
-        <div className="mt-6 p-4 bg-gray-100 rounded">
-          <h2 className="text-xl font-semibold mb-2">Result:</h2>
-          <p className="text-lg">
+        <div className="mt-6 p-4 bg-gray-200 rounded">
+          <h2 className="text-xl font-semibold mb-2 text-gray-900">Result:</h2>
+          <p className="text-lg text-gray-800">
             {calculationType === "storage" && `${result} PB`}
             {calculationType === "throughput" && `${result} MB/s`}
             {calculationType === "qps" && `${result} requests/second`}

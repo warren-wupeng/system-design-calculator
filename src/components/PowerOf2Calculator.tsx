@@ -32,20 +32,23 @@ export function PowerOf2Calculator() {
       </div>
 
       <button
-        className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
+        className="w-full bg-green-700 text-white p-2 rounded hover:bg-green-800"
         onClick={handleCalculate}
       >
         Convert
       </button>
 
       {result && (
-        <div className="mt-4 p-4 bg-gray-100 rounded">
-          <h3 className="text-xl font-semibold mb-2">Conversion Result:</h3>
-          <p>Power: {result.power}</p>
-          <p>Approximate Value: {result.approximateValue}</p>
-          <p>Full Name: {result.fullName}</p>
-          <p>Full Name: {result.fullName}</p>
-          <p>Short Name: {result.shortName}</p>
+        <div className="mt-4 p-4 bg-gray-200 rounded">
+          <h3 className="text-xl font-semibold mb-2 text-gray-900">
+            Conversion Result:
+          </h3>
+          <p className="text-gray-800">Power: {result.power}</p>
+          <p className="text-gray-800">
+            Approximate Value: {result.approximateValue}
+          </p>
+          <p className="text-gray-800">Full Name: {result.fullName}</p>
+          <p className="text-gray-800">Short Name: {result.shortName}</p>
         </div>
       )}
     </div>
