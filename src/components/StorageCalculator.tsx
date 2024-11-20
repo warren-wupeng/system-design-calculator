@@ -20,16 +20,19 @@ export function StorageCalculator({
 }: StorageCalculatorProps) {
   return (
     <div className="space-y-4">
-      <div className="bg-blue-50 p-4 rounded-lg mb-6">
-        <p className="text-sm text-blue-800">
+      <div className="bg-blue-100 p-4 rounded-lg mb-6">
+        <p className="text-sm text-blue-900">
           Storage = Daily Active Users × Requests per Day × Data Size per
           Request × Retention Period
         </p>
       </div>
       <div>
-        <label className="block mb-2">Daily Active Users</label>
+        <label htmlFor="quantity" className="block mb-2 text-gray-900">
+          Daily Active Users
+        </label>
         <div className="flex gap-2">
           <input
+            id="quantity"
             type="number"
             className="w-full p-2 border rounded"
             value={inputs.quantity}
@@ -37,7 +40,11 @@ export function StorageCalculator({
               setInputs({ ...inputs, quantity: Number(e.target.value) })
             }
           />
+          <label htmlFor="dailyActiveUserUnit" className="sr-only">
+            User Unit
+          </label>
           <select
+            id="dailyActiveUserUnit"
             className="w-32 p-2 border rounded"
             value={inputs.dailyActiveUserUnit}
             onChange={(e) =>
@@ -54,8 +61,14 @@ export function StorageCalculator({
       </div>
 
       <div>
-        <label className="block mb-2">Requests per User per Day</label>
+        <label
+          htmlFor="requestsPerUserPerDay"
+          className="block mb-2 text-gray-900"
+        >
+          Requests per User per Day
+        </label>
         <input
+          id="requestsPerUserPerDay"
           type="number"
           className="w-full p-2 border rounded"
           value={inputs.requestsPerUserPerDay}
@@ -68,9 +81,12 @@ export function StorageCalculator({
         />
       </div>
       <div>
-        <label className="block mb-2">Data Size per Request</label>
+        <label htmlFor="dataSize" className="block mb-2 text-gray-900">
+          Data Size per Request
+        </label>
         <div className="flex gap-2">
           <input
+            id="dataSize"
             type="number"
             className="w-full p-2 border rounded"
             value={inputs.dataSize}
@@ -78,7 +94,11 @@ export function StorageCalculator({
               setInputs({ ...inputs, dataSize: Number(e.target.value) })
             }
           />
+          <label htmlFor="unit" className="sr-only">
+            Data Unit
+          </label>
           <select
+            id="unit"
             className="w-32 p-2 border rounded"
             value={inputs.unit}
             onChange={(e) =>
@@ -98,9 +118,12 @@ export function StorageCalculator({
       </div>
 
       <div>
-        <label className="block mb-2">Retention Period</label>
+        <label htmlFor="timespan" className="block mb-2 text-gray-900">
+          Retention Period
+        </label>
         <div className="flex gap-2">
           <input
+            id="timespan"
             type="number"
             className="w-full p-2 border rounded"
             value={inputs.timespan}
@@ -108,7 +131,11 @@ export function StorageCalculator({
               setInputs({ ...inputs, timespan: Number(e.target.value) })
             }
           />
+          <label htmlFor="timeUnit" className="sr-only">
+            Time Unit
+          </label>
           <select
+            id="timeUnit"
             className="w-32 p-2 border rounded"
             value={inputs.timeUnit}
             onChange={(e) =>

@@ -17,8 +17,11 @@ export function PowerOf2Calculator() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="block mb-2">Power of 2</label>
+        <label htmlFor="powerOf2" className="block mb-2">
+          Power of 2
+        </label>
         <select
+          id="powerOf2"
           className="w-full p-2 border rounded"
           value={power}
           onChange={(e) => setPower(Number(e.target.value))}

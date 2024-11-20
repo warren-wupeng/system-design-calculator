@@ -111,8 +111,7 @@ function Calculator() {
           <option value="storage">Storage Estimation</option>
           <option value="throughput">Throughput Calculation</option>
           <option value="qps">QPS Estimation</option>
-          <option value="powerOf2">Power of 2 Conversion</option>{" "}
-          {/* 新增选项 */}
+          <option value="powerOf2">Power of 2 Conversion</option>
         </select>
       </div>
 
