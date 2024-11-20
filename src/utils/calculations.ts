@@ -16,6 +16,39 @@ export const TIME_UNITS = {
   YEAR: 31536000, // 365 days
 };
 
+export interface PowerOf2Result {
+  power: number;
+  approximateValue: string;
+  fullName: string;
+  shortName: string;
+}
+
+export function powerOf2Conversion(power: number): PowerOf2Result {
+  const mapping: {
+    [key: number]: { approximate: string; full: string; short: string };
+  } = {
+    10: { approximate: "1 Thousand", full: "1 Kilobyte", short: "1 KB" },
+    20: { approximate: "1 Million", full: "1 Megabyte", short: "1 MB" },
+    30: { approximate: "1 Billion", full: "1 Gigabyte", short: "1 GB" },
+    40: { approximate: "1 Trillion", full: "1 Terabyte", short: "1 TB" },
+    50: { approximate: "1 Quadrillion", full: "1 Petabyte", short: "1 PB" },
+  };
+
+  const result = mapping[power];
+  if (!result) {
+    throw new Error(
+      "Unsupported power value. Allowed values are 10, 20, 30, 40, 50."
+    );
+  }
+
+  return {
+    power,
+    approximateValue: result.approximate,
+    fullName: result.full,
+    shortName: result.short,
+  };
+}
+
 export function calculateStorage(
   dataSize: number,
   unit: keyof typeof UNITS,

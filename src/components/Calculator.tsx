@@ -3,18 +3,24 @@ import {
   calculateStorage,
   calculateThroughput,
   estimateQPS,
+  powerOf2Conversion,
   UNITS,
   TIME_UNITS,
 } from "../utils/calculations";
 import { StorageCalculator } from "./StorageCalculator";
 import { ThroughputCalculator } from "./ThroughputCalculator";
 import { QPSCalculator } from "./QPSCalculator";
+import { PowerOf2Calculator } from "./PowerOf2Calculator";
+import { PowerOf2Result } from "../utils/calculations";
 
 function Calculator() {
   const [calculationType, setCalculationType] = useState<
-    "storage" | "throughput" | "qps"
+    "storage" | "throughput" | "qps" | "powerOf2"
   >("storage");
   const [result, setResult] = useState<number | null>(null);
+  const [powerOf2Result, setPowerOf2Result] = useState<PowerOf2Result | null>(
+    null
+  );
 
   const [storageInputs, setStorageInputs] = useState({
     dataSize: 1,
@@ -42,7 +48,7 @@ function Calculator() {
 
   const calculateResult = () => {
     switch (calculationType) {
-      case "storage":
+      case "storage": {
         const storageResult = calculateStorage(
           storageInputs.dataSize,
           storageInputs.unit,
@@ -54,8 +60,9 @@ function Calculator() {
         );
         setResult(Number(storageResult.toFixed(2)));
         break;
+      }
 
-      case "throughput":
+      case "throughput": {
         const throughputResult = calculateThroughput(
           throughputInputs.requestsPerSecond,
           throughputInputs.dataSize,
@@ -63,8 +70,9 @@ function Calculator() {
         );
         setResult(Number(throughputResult.toFixed(2)));
         break;
+      }
 
-      case "qps":
+      case "qps": {
         const qpsResult = estimateQPS(
           qpsInputs.users,
           qpsInputs.requestsPerUser,
@@ -74,6 +82,12 @@ function Calculator() {
         );
         setResult(Number(qpsResult.toFixed(2)));
         break;
+      }
+
+      case "powerOf2": {
+        // 计算由 PowerOf2Calculator 处理
+        break;
+      }
     }
   };
 
@@ -88,11 +102,14 @@ function Calculator() {
           onChange={(e) => {
             setCalculationType(e.target.value as any);
             setResult(null);
+            setPowerOf2Result(null);
           }}
         >
           <option value="storage">Storage Estimation</option>
           <option value="throughput">Throughput Calculation</option>
           <option value="qps">QPS Estimation</option>
+          <option value="powerOf2">Power of 2 Conversion</option>{" "}
+          {/* 新增选项 */}
         </select>
       </div>
 
@@ -114,12 +131,16 @@ function Calculator() {
         <QPSCalculator inputs={qpsInputs} setInputs={setQpsInputs} />
       )}
 
-      <button
-        className="w-full mt-6 bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
-        onClick={calculateResult}
-      >
-        Calculate
-      </button>
+      {calculationType === "powerOf2" && <PowerOf2Calculator />}
+
+      {calculationType !== "powerOf2" && (
+        <button
+          className="w-full mt-6 bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
+          onClick={calculateResult}
+        >
+          Calculate
+        </button>
+      )}
 
       {result !== null && (
         <div className="mt-6 p-4 bg-gray-100 rounded">
@@ -128,6 +149,14 @@ function Calculator() {
             {calculationType === "storage" && `${result} PB`}
             {calculationType === "throughput" && `${result} MB/s`}
             {calculationType === "qps" && `${result} requests/second`}
+            {calculationType === "powerOf2" && (
+              <>
+                Power: {powerOf2Result?.power} <br />
+                Approximate Value: {powerOf2Result?.approximateValue} <br />
+                Full Name: {powerOf2Result?.fullName} <br />
+                Short Name: {powerOf2Result?.shortName}
+              </>
+            )}
           </p>
         </div>
       )}
