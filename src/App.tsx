@@ -3,9 +3,11 @@ import Calculator from "./components/Calculator";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <main className="min-h-screen bg-gray-100 py-12">
+      {" "}
+      {/* 将 div 替换为 main */}
       <Calculator />
-    </div>
+    </main>
   );
 }
 
